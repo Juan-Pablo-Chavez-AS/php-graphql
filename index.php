@@ -14,27 +14,15 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $method = $_SERVER["REQUEST_METHOD"];
+$paths = explode('/', rtrim($_SERVER['REQUEST_URI'], '/'));
+$mainPath = $paths[1];
 
 // include 'src/config/database.php';
 
-if ($method == "GET") {
-    $path = explode('/', rtrim($_SERVER['REQUEST_URI'], '/'))[1];
-
-    // $path = "path";
-
-    ob_end_clean();
-    echo json_encode([
-        "message" => "Get request processed",
-        "path" => $path
-    ]);
-} elseif ($method == "POST") {
-
-    echo json_encode([ "message" => "Post request processed"]);
-} elseif ($method == "PUT") {
-
-    echo json_encode([ "message" => "Put request processed"]);
-} elseif ($method == "DELETE") {
-
-    echo json_encode([ "message" => "Delete request processed"]);
+if ($mainPath === "users") {
+    include 'src/user.php';
+    exit();
 }
 
+http_response_code(404);
+echo json_encode(array("message" => "Not Found"));
