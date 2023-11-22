@@ -1,0 +1,11 @@
+{
+    "name": "juanpablo.chavez/php-graphql",
+    "require": {
+        "webonyx/graphql-php": "^15.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "JuanpabloChavez\\PhpGraphql\\": "src/"
+        }
+    }
+}
