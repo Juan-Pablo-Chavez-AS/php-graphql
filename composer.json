@@ -1,7 +1,8 @@
 {
     "name": "juanpablo.chavez/php-graphql",
     "require": {
-        "webonyx/graphql-php": "^15.8"
+        "webonyx/graphql-php": "^15.8",
+        "mongodb/mongodb": "^1.17"
     },
     "autoload": {
         "psr-4": {
