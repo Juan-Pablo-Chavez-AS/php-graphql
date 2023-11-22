@@ -1,10 +1,22 @@
 <?php
 
+class DBConnection { 
+    private static $connection = null;
 
+    private function __construct() { 
 
-$client = new MongoDB\Client("mongodb://localhost:27017");
-$collection = $client->demo->beers;
+    }
 
-$result = $collection->insertOne(['name' => 'Hinterland', 'brewery' => 'BrewDog']);
+    private function __clone() {
+        
+    }
 
-echo "Inserted with Object ID '{$result->getInsertedId()}'";
+    public static function getInstance() { 
+        if (DBConnection::$connection === null) { 
+            $connection = new MongoDB\Client("mongodb://localhost:27017");
+        }
+
+        return $connection;
+    }
+}
+
