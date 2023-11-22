@@ -1,11 +1,6 @@
 <?php
 ob_start();
 
-use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type;
-use GraphQL\GraphQL;
-use GraphQL\Type\Schema;
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 header("Content-Type: application/json; charset=UTF-8");

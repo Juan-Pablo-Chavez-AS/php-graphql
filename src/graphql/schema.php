@@ -1,8 +1,12 @@
 <?php
+
+include 'src/config/database.php';
 use GraphQL\Type\Definition\Type;
 use GraphQL\GraphQL;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Schema;
+
+$conn = DBConnection::getInstance();
 
 $userType = new ObjectType([
     'name' => 'Customer',
@@ -23,8 +27,8 @@ $queryType = new ObjectType([
             'args' => [
                 'id' => Type::int(),
             ],
-            'resolve' => function ($root, $args) {
-               return ["resolver result"];
+            'resolve' => function ($root, $args) use ($conn) {
+               return $conn->STORE->clients->find();
             }
         ],
     ],
