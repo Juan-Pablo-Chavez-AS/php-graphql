@@ -25,3 +25,13 @@ mutation {
 
 
 ### Delete a customer
+
+```
+mutation { 
+  deleteCustomer(id: 655e84326351c6baed6194b1)
+  {
+    firstname,
+    lastname
+  }
+}
+```
