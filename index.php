@@ -1,28 +1,22 @@
-<?php
-ob_start();
-
-use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type;
-use GraphQL\GraphQL;
-use GraphQL\Type\Schema;
+<?php declare(strict_types=1);
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once './src/graphql/user_schema.php';
 
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+use GraphQL\Server\StandardServer;
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Schema;
+use GraphQL\Type\SchemaConfig;
 
-$method = $_SERVER["REQUEST_METHOD"];
-$paths = explode('/', rtrim($_SERVER['REQUEST_URI'], '/'));
-$mainPath = $paths[1];
+$schema = new Schema(
+    (new SchemaConfig())
+    ->setQuery($queryType)
+    ->setMutation($mutationType)
+);
 
-// include 'src/config/database.php';
+$server = new StandardServer([
+    'schema' => $schema
+]);
 
-if ($mainPath === "users") {
-    include 'src/user.php';
-    exit();
-}
-
-http_response_code(404);
-echo json_encode(array("message" => "Not Found"));
+$server->handleRequest();
