@@ -12,6 +12,7 @@ use GraphQL\Type\SchemaConfig;
 $schema = new Schema(
     (new SchemaConfig())
     ->setQuery($queryType)
+    ->setMutation($mutationType)
 );
 
 $server = new StandardServer([

@@ -1,7 +1,5 @@
 <?php
 
-use MongoDB\Operation\Find;
-
 class DBConnection {
     private static $connection = null;
 
